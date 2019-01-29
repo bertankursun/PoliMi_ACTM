@@ -1,0 +1,207 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+    <!--JQUERY REFERENCES-->
+    
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/flick/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-2.1.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
+<!--
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/flick/jquery-ui.css">
+    <script src="../../Polydrum/main/src/jquery-ui-slider-pips.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../Polydrum/main/src/jquery-ui-slider-pips.css" />
+    
+-->
+    <script language="javascript" type="text/javascript" src="../../Polydrum/main/src/jquerycode.js"></script>
+    
+    <script language="javascript" type="text/javascript" src="../../Polydrum/main/microBit.js"></script>
+    <script src="../../Polydrum/main/src/plotly.min.js"></script>
+    <script language="javascript" type="text/javascript" src="sketch.js"></script>
+    <script language="javascript" type="text/javascript" src="drums.js"></script>
+    <script language="javascript" type="text/javascript" src="draw.js"></script>
+
+  <!-- this line removes any default padding and style. you might only need one of these values set. -->
+  <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+    <div class="main">
+        <h1> POLYDRUM <br/> </h1>
+        <div class="rightbox bottomsnap">
+            <h2> microBit device info <br/> </h2>
+            <button id="searchButton" onClick="searchDevice()">search device</button><button onclick="data()">start reading</button>
+            
+            <div id="properties" class="properties inactive">  
+            </div>
+            <div class="property">
+                Connected: <span id="connected" class="value"></span><br/> 
+                Rotation : Yaw :<span id="roll" class="value"></span>, pitch:<span id="pitch" class="value"></span>
+            </div>
+            <!--
+        <div class="property">
+        Accelerometer: X:<span id="acc_X" class="value"></span>, Y:<span id="acc_Y" class="value"></span>, Z:<span id="acc_Z" class="value"></span>
+        </div>
+-->
+        </div>
+        
+        <div>
+        <div class="functions">
+            <button onclick="learnks()">start learning kick and snare</button>-->
+            <button onclick="stopks()">stop learning kick and snare</button>
+            <button onclick="kick()">start kick and snare</button>
+            <button onclick="loopunostop()">stop loop kick and snare </button>
+        </div>
+        <div class="functions">
+            <button onclick="learnduo()">start learning toms</button>-->
+            <button onclick="stoptoms()">stop learning toms</button>
+            <button onclick="toms()">start toms</button>
+            <button onclick="loopduostop()">stop toms </button>
+        </div>
+        <div class="functions">
+            <button onclick="learntre()">start learning hats</button>-->
+            <button onclick="stoplearnhats()">stop learning hats</button>
+            <button onclick="hats()">start hats</button>
+            <button onclick="looptrestop()">stop hats </button>
+        </div>
+        
+        <form name="tempo" oninput="beatpermin.value = bpm.valueAsNumber">
+            <input id="bpm" type="range" step="1" min="30" max="120" value="60">  
+            <output name="beatpermin" for="bpm" >60</output>
+        </form>
+        <button class="startstop" onclick="startmainloop()">Playback</button>
+        <button class="startstop" onclick="stopmainloop()">Stop</button>    
+            
+    </div>
+        
+        <div class="rightbox mainmat">
+            <table class="drum-matrix" id="drum-matrix"> </table>
+            <table class="drum-matrix" id="drum-matrix2"> </table>
+            <div class="property">
+                Number of turns:<span id="turn2" class="value"></span>
+            </div>
+            <table class="drum-matrix" id="drum-matrix3"> </table>
+            <br/>
+            <br/>
+            <br/>
+            <div class="property">
+                Number of turns:<span id="turn3" class="value"></span>
+            </div>
+        </div>
+    
+        <div class="container">
+            <div id="buttons">
+                <h2> drum matrix kick and snare </h2>
+                <button id="resetButton" class="resetButton"><span id="reset">reset</span><br/>&nbsp;</button>
+                <div class="menuts" id="timesigks">
+                    <form action="#">
+                        <fieldset>
+                            <label for="timesig">Time signature</label>
+                            <select class="timesig" id="tsks">
+    <!--
+                                  <option value="1">12/8</option>
+                                  <option value="2">2/4</option>
+    -->
+                              <option value="0" selected="selected">4/4</option>
+
+                            </select>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container">
+            <div id="buttons">
+                <h2> drum matrix toms </h2>
+                <button id="resetButton2" class="resetButton"><span id="reset">reset</span><br/>&nbsp;</button>
+                <div class="menuts" id="timesigt">
+                    <form action="#">
+                        <fieldset>
+                            <label for="timesig2">Time signature</label>
+                            <select class="timesig" id="tstoms">
+                              <option value="1">5/4</option>
+                              <option value="2" selected="selected">3/4</option>
+                              <option value="3">7/4</option>
+                              <option value="4">7/8</option>
+                            </select>
+                        </fieldset>
+                    </form>
+      
+                </div>
+                <p id="polyinfo2"></p>
+            </div>
+        </div>
+        
+        <div class="container">
+            
+            <div id="buttons">
+                
+            <h2>drum matrix open and closed hat</h2>
+
+                <button id="resetButton3" class="resetButton"><span id="reset3">reset</span><br/>&nbsp;</button>
+
+                <div class="menuhats" id="timesighats">
+                    <form action="#">
+                        <fieldset>
+                            <label for="timesig3">Time signature</label>
+                            <select class="timesig" id="tshats">
+                              <option value="1">5/4</option>
+                              <option value="2" selected="selected">3/4</option>
+                              <option value="3">7/4</option>
+                              <option value="4">7/8</option>
+                              <option value="5">6/8</option>
+                            </select>
+
+                        </fieldset>
+                    </form>
+                </div>
+                
+
+            </div>
+        </div>
+        
+        
+    
+<!--
+  VISUALISATION 
+    <div class="navbar"><span>Real-Time Chart with Plotly.js</span></div>
+    <div class="wrapper">
+        <div id="chart"></div>
+        <script>
+  
+             function getDatax() {
+                return filteredax;
+            }  
+            Plotly.plot('chart',[{
+                y:[getDatax()],
+            
+                type:'line'
+            }]);
+            
+            var cnt = 0;
+            setInterval(function(){
+                Plotly.extendTraces('chart',{ y:[[getDatax()]]}, [0]);
+                cnt++;
+                if(cnt > 500) {
+                    Plotly.relayout('chart',{
+                        xaxis: {
+                            range: [cnt-500,cnt]
+                        }
+                    });
+                }
+            },15);
+        </script>
+    </div>
+-->
+    
+
+
+    </div>
+    
+</body>
+
+</html>
