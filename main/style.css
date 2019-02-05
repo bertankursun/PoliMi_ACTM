@@ -31,6 +31,7 @@ h1 {
     right: 30px;
     padding: 15px;
     display: block;
+    border: black;
 }
 
 .container {
@@ -39,6 +40,7 @@ h1 {
     position: relative;
     margin-left: 30px;
     padding: 15px;
+    border: black;
 }
 
 .container2 {
@@ -48,16 +50,18 @@ h1 {
     margin-left: 30px;
     display: inline-block;
     padding: 15px;
+    border: black;
 }
 
 .controls{
-    margin-top: 30px;
+    margin-top: 5px;
     position: absolute;
     bottom: inherit;
     left: 50%;
     transform: translate(-50%);
     display: inline-block;
     padding: 15px;
+    border: black;
 }
 
 .mainmat{
@@ -173,17 +177,20 @@ legend {
     display: inline-block;
     border: 1px solid white;
     padding: 5px;
+    border: black;
 }
 
 .box1.boxR{
     right: 15px;
     position: absolute;
+    border: black;
 }
 
 .box1.boxL{
     position: relative;
     align-items: center;
     right: auto;
+    border: black;
 }
 
 .timesig{
