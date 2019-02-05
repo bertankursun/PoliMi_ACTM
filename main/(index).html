@@ -29,13 +29,14 @@
 
 <body>
     <div class="main ui-widget-content">
+        
         <h1 class="ui-widget-header"> POLYDRUM <br/> </h1>
+        
         <div class="rightbox ui-widget-content">
             <h2 class="ui-widget"> microBit device info <br/> </h2>
-            <button id="searchButton" onClick="searchDevice()">search device</button>
-            <button onclick="data()">start reading</button>
+            <button class="searchButton" onClick="searchDevice()">search device</button>
+            <button class="searchButton" onclick="data()">start reading</button>
             
-            <div id="properties" class="properties inactive"></div>
             <div class="ui-widget">
                 Connected: <span id="connected" class="value"></span><br/> 
                 Rotation : Yaw :<span id="roll" class="value"></span>, pitch:<span id="pitch" class="value"></span>
@@ -70,12 +71,14 @@
         <div class="controls ui-widget-content">
             <h2 class="ui-widget">Main controls</h2>
             <div id="slider"></div>
-            
+            <span id=bpm></span>
+<!--
             
         <form name="tempo" oninput="beatpermin.value = bpm.valueAsNumber">
             <input id="bpm" type="range" step="1" min="30" max="120" value="60">  
             <output name="beatpermin" for="bpm" >60</output>
         </form>
+-->
             
         <button class="startstop" onclick="startmainloop()">
             <span class="ui-icon ui-icon-play"></span> Playback</button>
@@ -98,87 +101,71 @@
             </div>
         </div>
     
-        <div class="container ">
-            <div id="buttons">
-                <h2> drum matrix kick and snare </h2>
-                <button id="resetButton" class="resetButton"><span id="reset">reset</span><br/>&nbsp;</button>
-                <div class="menuts" id="timesigks">
-                    <form action="#">
-                        <fieldset>
-                            <label for="timesig">Time signature</label>
-                            <select class="timesig" id="tsks">
-    <!--
-                                  <option value="1">12/8</option>
-                                  <option value="2">2/4</option>
-    -->
-                              <option value="0" selected="selected">4/4</option>
-
-                            </select>
-
-                        </fieldset>
-                    </form>
-                </div>
-                <button onclick="kick()">start kick and snare</button>
-                <button onclick="loopunostop()">stop loop kick and snare </button>
+        <div class="container ui-widget-content">
+            
+            <h2>Kick and snare matrix</h2>
+            
+            <div class="box1 boxL">
+                <label for="tsks" class="ui-widget">Time signature</label><br/>
+                <select class="timesig" id="tsks">
+                    <option value="0" selected="selected">4/4</option>
+                </select>
             </div>
+            
+            <div class="box1 boxR" id="gest1">
+                <label for="gest1" class="ui-widget">Gestures input notes</label><br/> 
+                <button class="golearn" onclick="kick()">start input</button>
+                <button class="golearn" onclick="loopunostop()">stop input</button>
+            </div>
+            
+            <button class="resetButton" id="resetButton"><span id="reset">reset</span></button>
 
         </div>
 
-        <div class="container">
-            <div id="buttons">
-                <h2> drum matrix toms </h2>
-                <button id="resetButton2" class="resetButton"><span id="reset">reset</span><br/>&nbsp;</button>
-                <div class="menuts" id="timesigt">
-                    <form action="#">
-                        <fieldset>
-                            <label for="timesig2">Time signature</label>
-                            <select class="timesig" id="tstoms">
-                                <option value="0" selected="selected">4/4</option>
-                                <option value="1">5/4</option>
-                                <option value="2">3/4</option>
-                                <option value="3">7/4</option>
-<!--                                <option value="4">7/8</option>-->
-                            </select>
-                        </fieldset>
-                    </form>
-      
+        <div class="container ui-widget-content">
+                <h2>Toms matrix</h2>
+                
+                <div class="box1 boxL">
+                    <label for="tstoms" class="ui-widget">Time signature</label><br/>
+                    <select class="timesig" id="tstoms">
+                        <option value="0" selected="selected">4/4</option>
+                        <option value="1">5/4</option>
+                        <option value="2">3/4</option>
+                        <option value="3">7/4</option>
+<!--                       <option value="4">7/8</option>-->
+                    </select>
                 </div>
-                <button onclick="toms()">start toms</button>
-                <button onclick="loopduostop()">stop toms </button>
+                <div class="box1 boxR" id="gest2">
+                    <label for="gest2" class="ui-widget">Gestures input notes</label><br/> 
+                    <button class="golearn" onclick="toms()">start input</button>
+                    <button class="golearn" onclick="loopduostop()">stop input </button>
+                </div>
                 <p id="polyinfo2"></p>
-            </div>
+                <button class="resetButton" id="resetButton2" ><span id="reset">reset</span></button>
         </div>
         
-        <div class="container">
+        <div class="container ui-widget-content">  
             
-            <div id="buttons">
-                
-            <h2>drum matrix open and closed hat</h2>
+            <h2>Hi-hat matrix</h2>
 
-                <button id="resetButton3" class="resetButton"><span id="reset3">reset</span><br/>&nbsp;</button>
+                <div class="box1 boxL">
+                    <label for="tshats" class="ui-widget">Time signature</label><br/>
+                    <select class="timesig" id="tshats">
+                        <option value="0" selected="selected">4/4</option>
+                        <option value="1">5/4</option>
+                        <option value="2">3/4</option>
+                        <option value="3">7/4</option>
 
-                <div class="menuhats" id="timesighats">
-                    <form action="#">
-                        <fieldset>
-                            <label for="timesig3">Time signature</label>
-                            <select class="timesig" id="tshats">
-                                <option value="0" selected="selected">4/4</option>
-                                <option value="1">5/4</option>
-                                <option value="2">3/4</option>
-                                <option value="3">7/4</option>
-<!--
-                                <option value="4">7/8</option>
-                                <option value="5">6/8</option>
--->
-                            </select>
-
-                        </fieldset>
-                    </form>
+<!--                         <option value="4">7/8</option>
+                        <option value="5">6/8</option>-->
+                    </select>
                 </div>
-                <button onclick="hats()">start hats</button>
-                <button onclick="looptrestop()">stop hats </button>
-
-            </div>
+                <div class="box1 boxR" id="gest3">
+                    <label for="gest3" class="ui-widget">Gestures input notes</label><br/>
+                    <button class="golearn" onclick="hats()">start input</button>
+                    <button class="golearn" onclick="looptrestop()">stop input </button>
+                </div> 
+                    <button class="resetButton" id="resetButton3"><span id="reset3">reset</span></button>
         </div>
         
         

@@ -17,21 +17,28 @@ h1 {
     text-align: center;
 }
 
+#bpm{
+    position:relative;
+    text-align: center;
+    display: block;
+    margin: 5px;
+    font-weight: bold;
+}
+
 .rightbox{
     position: absolute;
     width: 25%;
     right: 30px;
     padding: 15px;
     display: block;
-    
 }
 
 .container {
-    width: 20%;
+    width: 18.5%;
     height: 200px;
     position: relative;
     margin-left: 30px;
-    border: 1px solid white;
+    padding: 15px;
 }
 
 .container2 {
@@ -39,6 +46,16 @@ h1 {
     height: auto;
     position: relative;
     margin-left: 30px;
+    display: inline-block;
+    padding: 15px;
+}
+
+.controls{
+    margin-top: 30px;
+    position: absolute;
+    bottom: inherit;
+    left: 50%;
+    transform: translate(-50%);
     display: inline-block;
     padding: 15px;
 }
@@ -75,48 +92,6 @@ legend {
     align-items: center;
     display: flex;
 }
-
-
-
-.controls{
-    margin-top: 30px;
-    position: absolute;
-    bottom: inherit;
-    left: 50%;
-    transform: translate(-50%);
-    display: inline-block;
-    padding: 15px;
-}
-.property { /*not applied*/
-  border: 1px bottom;
-  display: block;
-  font-size: 30px;
-  color: #000;
-}
-
-.property.value {
-  text-decoration: underline;
-  color: blue;
-  font-weight: bold;
-}
-
-#searchButton {
-  font-size: 10px;
-  border: 2px solid black;
-  padding: 10px 20px;
-  
-}
-
-button{
-  font-size: 15px;
-  border: 2px solid purple;
-  padding: 5px 10px;
-  top: -3px;
-  position: relative;
-}
-
-.cell {/*not applied*/
-  }
 
 .drum-matrix {
     border-spacing: 5px;
@@ -183,35 +158,41 @@ button{
   visibility: hidden;
 }
 
+.golearn{
+    font-size: 12px;
+}
+
 .resetButton {
-  margin-right: .2em;
-  float: left;
-  font-family: TR-909;
-  font-size: 2em;
-  background-color: crimson;
-  border: none;
-  border-radius: .2em;
-  border-bottom-style: solid;
-  width: 5em;
-  height: 2em;
+    position: absolute;
+    display: inline-block;
+    right: 15px;
+    bottom: 15px;
 }
 
-#tempoInput {
-  margin-right: .2em;
-  font-family: TR-909;
-  font-size: 2em;
-  text-align: center;
-  float: left;
-  resize: none;
-  border-radius: 5px;
-  border: none;
-  width: 3.3em;
-  height: 1.6em;
+.box1{
+    display: inline-block;
+    border: 1px solid white;
+    padding: 5px;
 }
 
-#buttons {
-  margin-bottom: 15px;
+.box1.boxR{
+    right: 15px;
+    position: absolute;
 }
+
+.box1.boxL{
+    position: relative;
+    align-items: center;
+    right: auto;
+}
+
+.timesig{
+    left: 50%;
+    transform: translate(-50%);
+    
+}
+
+
 
 
 

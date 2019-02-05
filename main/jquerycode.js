@@ -1,22 +1,36 @@
 $(function() {
     $( ".timesig" ).selectmenu({
-        width: 100
+        width: 90
     });
     
     
     $(".startstop").button();
+    $(".resetbutton").button();
+    
     
     $( "#slider" ).slider({
         min: 30,
         max: 200,
         step: 1,
-        value: 80
+        value: 80,
+        change: function( event, ui ) {
+            var selection = $( this ).slider( "value" );
+            var newTempo = Number(selection);
+            tempo = newTempo;
+            setTime();
+            $( "#bpm" ).text(selection+" bpm");
+        },
+        
     });
     
     $( "input[type='radio']" ).checkboxradio();
     
+    $(".searchbutton").button();
     
     $(".learnbutton").button();
+    
+    $(".golearn").button();
+    
     
     $("#learn").click(function() {
         $( this ).toggleClass( "ui-state-active" );

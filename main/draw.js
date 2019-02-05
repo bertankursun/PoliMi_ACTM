@@ -292,10 +292,14 @@ function setTempo() {
 }
 
 window.onload = function() {
-    setTime();
     
-    setInitialTempo(Number(document.getElementById("bpm").value));
-    document.getElementById("bpm").addEventListener("change", setTempo);
+    document.getElementById("bpm").innerHTML = $( "#slider" ).slider( "value" )+" bpm";
+    
+    //setTime();
+    
+    //setInitialTempo(Number(document.getElementById("bpm").value));
+    setInitialTempo($( "#slider" ).slider( "value" ));
+    //document.getElementById("bpm").addEventListener("change", setTempo);
     
     changeTS(1);
     changeTS(2);
