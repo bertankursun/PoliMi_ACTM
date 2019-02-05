@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
     <!--JQUERY REFERENCES-->
     
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/flick/jquery-ui.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/ui-darkness/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-2.1.1.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     
@@ -14,9 +14,10 @@
     <link rel="stylesheet" type="text/css" href="../../Polydrum/main/src/jquery-ui-slider-pips.css" />
     
 -->
-    <script language="javascript" type="text/javascript" src="../../Polydrum/main/src/jquerycode.js"></script>
+    <script language="javascript" type="text/javascript" src="jquerycode.js"></script>
     
     <script language="javascript" type="text/javascript" src="../../Polydrum/main/microBit.js"></script>
+    
     <script src="../../Polydrum/main/src/plotly.min.js"></script>
     <script language="javascript" type="text/javascript" src="sketch.js"></script>
     <script language="javascript" type="text/javascript" src="drums.js"></script>
@@ -27,15 +28,15 @@
 </head>
 
 <body>
-    <div class="main">
-        <h1> POLYDRUM <br/> </h1>
-        <div class="rightbox bottomsnap">
-            <h2> microBit device info <br/> </h2>
-            <button id="searchButton" onClick="searchDevice()">search device</button><button onclick="data()">start reading</button>
+    <div class="main ui-widget-content">
+        <h1 class="ui-widget-header"> POLYDRUM <br/> </h1>
+        <div class="rightbox ui-widget-content">
+            <h2 class="ui-widget"> microBit device info <br/> </h2>
+            <button id="searchButton" onClick="searchDevice()">search device</button>
+            <button onclick="data()">start reading</button>
             
-            <div id="properties" class="properties inactive">  
-            </div>
-            <div class="property">
+            <div id="properties" class="properties inactive"></div>
+            <div class="ui-widget">
                 Connected: <span id="connected" class="value"></span><br/> 
                 Rotation : Yaw :<span id="roll" class="value"></span>, pitch:<span id="pitch" class="value"></span>
             </div>
@@ -45,35 +46,42 @@
         </div>
 -->
         </div>
+
+        <fieldset class="container2 ui-widget-content">
+            <legend>Learn hit gestures: </legend>
+            <label for="radio-1">Kick and Snare</label>
+            <input type="radio" name="radio-1" id="radio-1" value="1" checked="checked">
+            <label for="radio-2">Toms</label>
+            <input type="radio" name="radio-1" id="radio-2" value="2">
+            <label for="radio-3">Hi hat</label>
+            <input type="radio" name="radio-1" id="radio-3" value="3">
+            <br/>
+            
+            <button class="learnbutton" id="opener"><span class="ui-icon ui-icon-newwin"></span> How to play</button>
+            
+            <div id="dialog1" title="Kick and Snare gestures">Put instruction here</div>
+            <div id="dialog2" title="Toms gestures">Put instruction here</div>
+            <div id="dialog3" title="Hi Hat gestures">Put instruction here</div>
+            
+            <button class="learnbutton" id="learn">
+                <span class="ui-icon ui-icon-play"></span> Start learning</button>  
+        </fieldset>
         
-        <div>
-        <div class="functions">
-            <button onclick="learnks()">start learning kick and snare</button>-->
-            <button onclick="stopks()">stop learning kick and snare</button>
-            <button onclick="kick()">start kick and snare</button>
-            <button onclick="loopunostop()">stop loop kick and snare </button>
-        </div>
-        <div class="functions">
-            <button onclick="learnduo()">start learning toms</button>-->
-            <button onclick="stoptoms()">stop learning toms</button>
-            <button onclick="toms()">start toms</button>
-            <button onclick="loopduostop()">stop toms </button>
-        </div>
-        <div class="functions">
-            <button onclick="learntre()">start learning hats</button>-->
-            <button onclick="stoplearnhats()">stop learning hats</button>
-            <button onclick="hats()">start hats</button>
-            <button onclick="looptrestop()">stop hats </button>
-        </div>
-        
+        <div class="controls ui-widget-content">
+            <h2 class="ui-widget">Main controls</h2>
+            <div id="slider"></div>
+            
+            
         <form name="tempo" oninput="beatpermin.value = bpm.valueAsNumber">
             <input id="bpm" type="range" step="1" min="30" max="120" value="60">  
             <output name="beatpermin" for="bpm" >60</output>
         </form>
-        <button class="startstop" onclick="startmainloop()">Playback</button>
+            
+        <button class="startstop" onclick="startmainloop()">
+            <span class="ui-icon ui-icon-play"></span> Playback</button>
         <button class="startstop" onclick="stopmainloop()">Stop</button>    
             
-    </div>
+        </div>
         
         <div class="rightbox mainmat">
             <table class="drum-matrix" id="drum-matrix"> </table>
@@ -90,7 +98,7 @@
             </div>
         </div>
     
-        <div class="container">
+        <div class="container ">
             <div id="buttons">
                 <h2> drum matrix kick and snare </h2>
                 <button id="resetButton" class="resetButton"><span id="reset">reset</span><br/>&nbsp;</button>
@@ -110,6 +118,8 @@
                         </fieldset>
                     </form>
                 </div>
+                <button onclick="kick()">start kick and snare</button>
+                <button onclick="loopunostop()">stop loop kick and snare </button>
             </div>
 
         </div>
@@ -123,15 +133,18 @@
                         <fieldset>
                             <label for="timesig2">Time signature</label>
                             <select class="timesig" id="tstoms">
-                              <option value="1">5/4</option>
-                              <option value="2" selected="selected">3/4</option>
-                              <option value="3">7/4</option>
-                              <option value="4">7/8</option>
+                                <option value="0" selected="selected">4/4</option>
+                                <option value="1">5/4</option>
+                                <option value="2">3/4</option>
+                                <option value="3">7/4</option>
+<!--                                <option value="4">7/8</option>-->
                             </select>
                         </fieldset>
                     </form>
       
                 </div>
+                <button onclick="toms()">start toms</button>
+                <button onclick="loopduostop()">stop toms </button>
                 <p id="polyinfo2"></p>
             </div>
         </div>
@@ -149,17 +162,21 @@
                         <fieldset>
                             <label for="timesig3">Time signature</label>
                             <select class="timesig" id="tshats">
-                              <option value="1">5/4</option>
-                              <option value="2" selected="selected">3/4</option>
-                              <option value="3">7/4</option>
-                              <option value="4">7/8</option>
-                              <option value="5">6/8</option>
+                                <option value="0" selected="selected">4/4</option>
+                                <option value="1">5/4</option>
+                                <option value="2">3/4</option>
+                                <option value="3">7/4</option>
+<!--
+                                <option value="4">7/8</option>
+                                <option value="5">6/8</option>
+-->
                             </select>
 
                         </fieldset>
                     </form>
                 </div>
-                
+                <button onclick="hats()">start hats</button>
+                <button onclick="looptrestop()">stop hats </button>
 
             </div>
         </div>

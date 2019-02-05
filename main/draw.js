@@ -47,17 +47,21 @@ function reset(matrix) {
 function highlightActive(n,matrix) {
     var table=getMatId(matrix);
     var active = document.getElementById(table);
-    active.rows[0].cells[n].classList.add("active");
-    active.rows[1].cells[n].classList.add("active");
+    $(active.rows[0].cells[n]).effect("fade",150);
+    $(active.rows[1].cells[n]).effect("fade",150);
+//    $(active.rows[0].cells[n]).hide();
+//    $(active.rows[0].cells[n]).show("highlight");
+//    active.rows[0].cells[n].classList.add("active");
+//    active.rows[1].cells[n].classList.add("active");
 }
 
 function removeHighlight(matrix) {
-    var table=getMatId(matrix);
-    var deactive = document.getElementById(table);
-    for (i = 0; i < deactive.rows[0].cells.length; i++) {
-            deactive.rows[0].cells[i].classList.remove("active");
-            deactive.rows[1].cells[i].classList.remove("active");
-        }
+//    var table=getMatId(matrix);
+//    var deactive = document.getElementById(table);
+//    for (i = 0; i < deactive.rows[0].cells.length; i++) {
+//            deactive.rows[0].cells[i].classList.remove("active");
+//            deactive.rows[1].cells[i].classList.remove("active");
+//        }
 }
 
 function removeArm(matrix) {
@@ -66,6 +70,8 @@ function removeArm(matrix) {
     for (i = 0; i < deactive.rows[0].cells.length; i++) {
             deactive.rows[0].cells[i].classList.remove("armed");
             deactive.rows[1].cells[i].classList.remove("armed");
+            deactive.rows[0].cells[i].classList.add("notArmed");
+            deactive.rows[1].cells[i].classList.add("notArmed");
         }
 }
 
@@ -87,51 +93,92 @@ function generateTable(n,table,beat) {
             var cell = row.insertCell(k);
             
             switch ( dis ) {
-                    
                 case 'drum-matrix':
-                    cell.classList.add(k, "cell", "notArmed");
-            cell.id = k;
-            armByClick(dis,i,cell);
-            if (k % (n/beat) === 0) {
-                cell.classList.add("beginningOfBeat");
-                if (!cell.classList.contains("armed")) {
-                    cell.classList.add("notArmedBeginningOfBeat");
-                }
-            }
+                    cell.classList.add(k, "cell", "subbeat", "notArmed","ui-corner-all");
+                    assignProp(k,cell);
+                    armByClick(dis,i,cell);
+                    if (k % (n/beat) === 0) {
+                        cell.classList.remove("subbeat");
+                        cell.classList.add("Beat", "notArmed");
+//                        if (cell.classList.contains("armed")) {
+//                            cell.classList.remove("Beat","notArmed");
+//                            cell.classList.add("Beat","armed");
+//                        }
+                    }
                     break;
                 case 'drum-matrix2':
-                              
-            cell.classList.add(k+100, "cell", "notArmed");
-            cell.id = k;
-            armByClick(dis,i,cell);
-            if (k % (n/beat) === 0) {
-                cell.classList.add("beginningOfBeat");
-                if (!cell.classList.contains("armed")) {
-                    cell.classList.add("notArmedBeginningOfBeat");
-                }
-            }
+                    cell.classList.add(k+100, "cell", "subbeat","notArmed", "ui-corner-all");
+                    assignProp(k,cell);
+                    armByClick(dis,i,cell);
+                    if (k % (n/beat) === 0) {
+                        cell.classList.remove("subbeat");
+                        cell.classList.add("Beat", "notArmed");
+                    }       
                     break;
-                    
                 case 'drum-matrix3':
-                    cell.classList.add(k+200, "cell", "notArmed");
-            cell.id = k;
-            armByClick(dis,i,cell);
-            if (k % (n/beat) === 0) {
-                cell.classList.add("beginningOfBeat");
-                if (!cell.classList.contains("armed")) {
-                    cell.classList.add("notArmedBeginningOfBeat");
-                }
+                    cell.classList.add(k+200, "cell", "subbeat","notArmed", "ui-corner-all");
+                    assignProp(k,cell);
+                    armByClick(dis,i,cell);
+                    if (k % (n/beat) === 0) {
+                        cell.classList.remove("subbeat");
+                        cell.classList.add("Beat", "notArmed");
+                    }
+                    break; 
             }
-                    break;
-                    
-                    
-                    
-            }
-            
-
         }
     }
-}   
+}
+
+function assignProp(k,cell){
+    cell.id = k;
+    $(cell).mouseenter(function(){
+        $(this).addClass("hover");
+    });
+    $(cell).mouseleave(function(){
+        $(this).removeClass("hover");
+    }); 
+    
+}
+
+function armByClick(dis,row,cell) {
+    switch (dis){
+        case "drum-matrix":
+            if (row === 0){ 
+                cell.addEventListener("click", function(){ filteredkicks.arming(this.id,this); }); 
+            }else{
+                cell.addEventListener("click", function(){ filteredsnare.arming(this.id,this); });
+            }
+        break;
+        case "drum-matrix2":
+            if (row === 0){ 
+                cell.addEventListener("click", function(){ tomone.arming(this.id,this); }); 
+            }else{
+                cell.addEventListener("click", function(){ tomtwo.arming(this.id,this); });
+            }
+        break;
+        case "drum-matrix3":
+            if (row === 0){ 
+                cell.addEventListener("click", function(){ closedh.arming(this.id,this); }); 
+            }else{
+                cell.addEventListener("click", function(){ openh.arming(this.id,this); });
+            }
+        break;
+        default:
+    }  
+}
+
+Array.prototype.arming = function(index,cell) {
+    var isArmed = cell.classList.contains("armed");
+    if (!isArmed) {
+        cell.classList.remove("notArmed");
+        cell.classList.add("armed");
+        this[index] = 1;
+    }else{
+        cell.classList.remove("armed");
+        cell.classList.add("notArmed");
+        this[index] = 0;
+    }
+}; 
 
 function changeTS(matrix){ 
     var table=[];
@@ -242,54 +289,11 @@ function setTempo() {
   var newTempo = Number(document.getElementById("bpm").value);
   tempo = newTempo;
   setTime();
-
 }
-
-function armByClick(dis,row,cell) {
-    switch (dis){
-        case "drum-matrix":
-            if (row === 0){ 
-                cell.addEventListener("click", function(){ filteredkicks.arming(this.id,this); }); 
-            }else{
-                cell.addEventListener("click", function(){ filteredsnare.arming(this.id,this); });
-            }
-        break;
-        case "drum-matrix2":
-            if (row === 0){ 
-                cell.addEventListener("click", function(){ tomone.arming(this.id,this); }); 
-            }else{
-                cell.addEventListener("click", function(){ tomtwo.arming(this.id,this); });
-            }
-        break;
-        case "drum-matrix3":
-            if (row === 0){ 
-                cell.addEventListener("click", function(){ closedh.arming(this.id,this); }); 
-            }else{
-                cell.addEventListener("click", function(){ openh.arming(this.id,this); });
-            }
-        break;
-        default:
-    }  
-}
-
-Array.prototype.arming = function(index,cell) {
-    var isArmed = cell.classList.contains("armed");
-    if (!isArmed) {
-        cell.classList.remove("notArmed", "notArmedBeginningOfBeat");
-        cell.classList.add("armed");
-        this[index] = 1;
-    }else{
-        cell.classList.remove("armed");
-        if (cell.classList.contains("beginningOfBeat")) {
-            cell.classList.add("notArmedBeginningOfBeat");
-        }
-        cell.classList.add("notArmed");
-        this[index] = 0;
-    }
-}; 
 
 window.onload = function() {
     setTime();
+    
     setInitialTempo(Number(document.getElementById("bpm").value));
     document.getElementById("bpm").addEventListener("change", setTempo);
     
