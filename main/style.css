@@ -162,7 +162,15 @@ legend {
   visibility: hidden;
 }
 
+.upperspace{
+    margin-top: 13px;
+}
+
+.startstop{
+    margin-top: 13px;
+}
 .golearn{
+    margin-top: 15px;
     font-size: 12px;
 }
 
@@ -194,9 +202,7 @@ legend {
 }
 
 .timesig{
-    left: 50%;
-    transform: translate(-50%);
-    
+    margin-bottom: 5px;
 }
 
 
