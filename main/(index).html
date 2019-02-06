@@ -37,9 +37,9 @@
             <button class="searchButton" onClick="searchDevice()">search device</button>
             <button class="searchButton" onclick="data()">start reading</button>
             
-            <div class="upperspace" "ui-widget">
-                Connected: <span id="connected" class="value"></span><br/> 
-                Rotation : Yaw :<span id="roll" class="value"></span>, pitch:<span id="pitch" class="value"></span>
+            <div class="ui-widget">
+                <br>Connected: <br><span id="connected" class="value"></span><br/> 
+                Rotation : Yaw :<span id="roll" class="value"></span> pitch:<span id="pitch" class="value"></span>
             </div>
             <!--
         <div class="property">
@@ -89,14 +89,14 @@
         <div class="rightbox mainmat">
             <table class="drum-matrix" id="drum-matrix"> </table>
             <table class="drum-matrix" id="drum-matrix2"> </table>
-            <div class="property">
+            <div style="font-size: 25px;font-style: oblique"class="property">
                 Number of turns:<span id="turn2" class="value"></span>
             </div>
             <table class="drum-matrix" id="drum-matrix3"> </table>
             <br/>
             <br/>
             <br/>
-            <div class="property">
+            <div style="font-size: 25px;font-style: oblique" class="property">
                 Number of turns:<span id="turn3" class="value"></span>
             </div>
         </div>
@@ -106,10 +106,10 @@
             <h2>Kick and snare matrix</h2>
             
             <div class="box1 boxL">
-                <label for="tsks" class="ui-widget">Time signature</label><br/>
-                    <select class="timesig" id="tsks">
+                <label for="tsks" class="ui-widget">Time signature<br/></label><br/>
+                <select class="timesig" id="tsks">
                     <option value="0" selected="selected">4/4</option>
-                    </select>
+                </select>
             </div>
             
             <div class="box1 boxR" id="gest1">
@@ -126,7 +126,7 @@
                 <h2>Toms matrix</h2>
                 
                 <div class="box1 boxL">
-                    <label for="tstoms" class="ui-widget">Time signature</label><br/>
+                    <label for="tstoms" class="ui-widget">Time signature<br/></label><br/>
                     <select class="timesig" id="tstoms">
                         <option value="0" selected="selected">4/4</option>
                         <option value="1">5/4</option>
@@ -149,7 +149,7 @@
             <h2>Hi-hat matrix</h2>
 
                 <div class="box1 boxL">
-                    <label for="tshats" class="ui-widget">Time signature</label><br/>
+                    <label for="tshats" class="ui-widget">Time signature<br/></label><br/>
                     <select class="timesig" id="tshats">
                         <option value="0" selected="selected">4/4</option>
                         <option value="1">5/4</option>
