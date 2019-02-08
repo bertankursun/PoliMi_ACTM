@@ -7,18 +7,12 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/ui-darkness/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-2.1.1.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    
-<!--
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/flick/jquery-ui.css">
-    <script src="../../Polydrum/main/src/jquery-ui-slider-pips.js"></script>
-    <link rel="stylesheet" type="text/css" href="../../Polydrum/main/src/jquery-ui-slider-pips.css" />
-    
--->
+
     <script language="javascript" type="text/javascript" src="jquerycode.js"></script>
     
-    <script language="javascript" type="text/javascript" src="../../Polydrum/main/microBit.js"></script>
+    <script language="javascript" type="text/javascript" src="microBit.js"></script>
     
-    <script src="../../Polydrum/main/src/plotly.min.js"></script>
+    <script src="src/plotly.min.js"></script>
     <script language="javascript" type="text/javascript" src="sketch.js"></script>
     <script language="javascript" type="text/javascript" src="drums.js"></script>
     <script language="javascript" type="text/javascript" src="draw.js"></script>
@@ -34,8 +28,11 @@
         
         <div class="rightbox ui-widget-content">
             <h2 class="ui-widget"> microBit device info <br/> </h2>
-            <button class="searchButton" onClick="searchDevice()">search device</button>
-            <button class="searchButton" onclick="data()">start reading</button>
+            <button  class="searchbutton" id="searchButton" onClick="searchDevice()">search device</button>
+            <button class="searchbutton" onclick="data()">start reading</button>
+            
+            <!--MANDATORY FOR MICROBIT CONNECTION-->
+            <div id="properties" class="properties inactive"></div> 
             
             <div class="ui-widget">
                 <br>Connected: <br><span id="connected" class="value"></span><br/> 
